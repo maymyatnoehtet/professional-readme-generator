@@ -47,6 +47,4 @@
 
     If you have any questions, you can reach me through GitHub or email:
 
-    - GitHub: [maymyatnoehtet](https://github.com/maymyatnoehtet)
-    - Email: may.mn.htet@gmail.com
-        
+    - GitHub: [maymyatnoehtet](https://github.com/maymyatnoehtet)        

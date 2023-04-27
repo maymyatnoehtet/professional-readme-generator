@@ -46,11 +46,6 @@ const questions = [
     type: 'input',
     name: 'github',
     message: 'Please enter your GitHub username:',
-  },
-  {
-    type: 'input',
-    name: 'email',
-    message: 'Please enter your email address:',
   }
 ];
 
@@ -108,8 +103,7 @@ function writeToFile(fileName, answers) {
     If you have any questions, you can reach me through GitHub or email:
 
     - GitHub: [${answers.github}](https://github.com/${answers.github})
-    - Email: ${answers.email}
-        `;
+  `;
   
   /* write a readme file using readme template */
   fs.writeFile(fileName, readmeTemplate, 
