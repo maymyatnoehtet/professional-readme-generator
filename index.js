@@ -24,6 +24,16 @@ const questions = [
   },
   {
     type: 'input',
+    name: 'credits',
+    message: 'Please provide credits for contributing to your project:',
+  },
+  {
+    type: 'input',
+    name: 'license',
+    message: 'Please enter the license for your project:',
+  },
+  {
+    type: 'input',
     name: 'contribution',
     message: 'Please provide guidelines for contributing to your project:',
   },
@@ -31,11 +41,6 @@ const questions = [
     type: 'input',
     name: 'tests',
     message: 'Please provide any test instructions for your project:',
-  },
-  {
-    type: 'input',
-    name: 'license',
-    message: 'Please enter the license for your project:',
   },
   {
     type: 'input',
@@ -64,9 +69,10 @@ function writeToFile(fileName, answers) {
 
     - [Installation](#installation)
     - [Usage](#usage)
-    - [Contribution Guidelines](#contribution-guidelines)
-    - [Tests](#tests)
+    - [Credits](#credits)
     - [License](#license)
+    - [How to Contribute](#contribution)
+    - [Tests](#tests)
     - [Questions](#questions)
 
     ## Installation
@@ -77,17 +83,25 @@ function writeToFile(fileName, answers) {
 
     ${answers.usage}
 
-    ## Contribution Guidelines
+    ## Credits
+
+    ${answers.credits}
+
+    ## License
+
+    This project is licensed under the ${renderLicenseLink(answers.license)} license.
+
+    ## Badges
+
+    This project is licensed under the ${renderLicenseBadge(answers.license)} license.
+
+    ## How to Contribute
 
     ${answers.contribution}
 
     ## Tests
 
     ${answers.tests}
-
-    ## License
-
-    This project is licensed under the ${answers.license} license.
 
     ## Questions
 
@@ -111,6 +125,54 @@ function init() {
   inquirer
     .prompt(questions)
     .then(answers => writeToFile('README.md', answers));
+}
+
+// TODO: Create a function that returns the license link
+// If there is no license, return an empty string
+function renderLicenseLink(license) {
+  function renderLicenseLink(license) {
+    let licenseLink = '';
+    switch (license) {
+      case 'MIT':
+        licenseLink = 'https://opensource.org/licenses/MIT';
+        break;
+      case 'Apache 2.0':
+        licenseLink = 'https://opensource.org/licenses/Apache-2.0';
+        break;
+      case 'GPL 3.0':
+        licenseLink = 'https://www.gnu.org/licenses/gpl-3.0';
+        break;
+      case 'BSD 3-Clause':
+        licenseLink = 'https://opensource.org/licenses/BSD-3-Clause';
+        break;
+      default:
+        licenseLink = '';
+    }
+    return licenseLink;
+  }
+}
+
+// TODO: Create a function that returns a license badge based on which license is passed in
+// If there is no license, return an empty string
+function renderLicenseBadge(license) {
+  let licenseBadge = '';
+  switch (license) {
+    case 'MIT':
+      licenseBadge = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
+      break;
+    case 'Apache 2.0':
+      licenseBadge = '[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)';
+      break;
+    case 'GPL 3.0':
+      licenseBadge = '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)';
+      break;
+    case 'BSD 3-Clause':
+      licenseBadge = '[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)';
+      break;
+    default:
+      licenseBadge = '';
+  }
+  return licenseBadge;
 }
 
 /* Function call to initialize app */
